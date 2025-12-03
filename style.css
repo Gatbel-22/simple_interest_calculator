@@ -1,93 +1,225 @@
-body {
+/* Reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body & Layout */
+body {
   font-family: "Arial", sans-serif;
-  background: linear-gradient(to bottom right, #024, #046);
-  color: #fff;
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: flex-start;
+  padding: 1vh 1vw;
+  transition: background 0.3s, color 0.3s;
 }
 
-.container {
-  background: #ffffff;
-  color: #000;
-  width: 90%;
-  max-width: 450px;
-  padding: 40px;
-  margin-left: 40px;
-  border-radius: 18px;
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+/* Light & Dark Mode */
+body.light {
+  background: linear-gradient(135deg, #e0f7fa, #f4f4f4);
+  color: #222;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #001b33, #003366);
+  color: #fff;
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  background: #024b6f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#themeToggle:hover {
+  background: #035;
+  transform: scale(1.1);
+}
+
+/* Header */
+header {
   text-align: center;
+  margin-bottom: 1vh;
+  width: 100%;
 }
 
-h1 {
-  font-size: 28px;
-  padding: 4px;
-  margin-top: 8px;
-  margin-bottom: 4px;
-  color: #024;
+h2 {
+  font-size: 2vw;
+  margin-bottom: 0.5vh;
 }
 
 .subtitle {
-  margin-top: -5px;
-  font-size: 14px;
-  color: #333;
+  font-size: 1vw;
+  color: #555;
 }
 
-label {
-  display: block;
-  margin-top: 9px;
-  font-weight: bold;
-  text-align: left;
+/* Main Container */
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  color: black;
+  width: 95%;
+  max-width: 500px;
+  border-radius: 16px;
+  padding: 2vh 2vw;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body.dark .container {
+  background: rgba(0, 27, 51, 0.85);
+  color: #fff;
+}
+
+/* Bank Selection */
+.bank-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bank-select img {
+  width: 10vw;
+  max-width: 50px;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Inputs */
+.input-group {
+  margin-bottom: 2vh;
 }
 
 input,
 select {
   width: 100%;
-  padding: 5px;
-  margin-top: 2px;
-  border-radius: 8px;
+  padding: 1vh 1vw;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 1.2vw;
+  background: #f8f8f8;
+  transition: background 0.3s, color 0.3s;
 }
 
-input[type="range"] {
-  width: 50%;
+body.dark input,
+body.dark select {
+  background: #002244;
+  color: #fff;
+  border: 1px solid #555;
 }
 
+/* Buttons */
 button {
-  margin-top: 10px;
-  width: 50%;
-  padding: 6px;
+  width: 100%;
+  padding: 1.5vh 0;
+  margin-top: 1vh;
   background: #024;
   color: white;
-  font-size: 18px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  font-size: 1.5vw;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background: #046;
+  background: #035;
 }
 
+#downloadBtn {
+  background: #006600;
+}
+
+#downloadBtn:hover {
+  background: #008000;
+}
+
+/* Result */
 #resultBox {
-  background: #eef;
-  border-left: 4px solid #024;
-  padding: 3px;
-  margin-top: 40px;
-  min-height: 5px;
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1vh 1vw;
+  border-radius: 10px;
+  margin-bottom: 1vh;
+  font-size: 1.2vw;
 }
 
+/* Footer */
 footer {
-  position: fixed;
-  bottom: 10px;
+  margin-top: 2vh;
   text-align: center;
-  width: 100%;
-  color: #ddd;
-  font-size: 12px;
+  font-size: 1vw;
+  color: #888;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 5vw;
+  }
+  .subtitle {
+    font-size: 3vw;
+  }
+  input,
+  select,
+  button {
+    font-size: 3vw;
+  }
+  #resultBox {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 6vw;
+  }
+  .subtitle {
+    font-size: 3.5vw;
+  }
+  input,
+  select,
+  button {
+    font-size: 4vw;
+  }
+  #resultBox {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 7vw;
+  }
+  .subtitle {
+    font-size: 4vw;
+  }
+  input,
+  select,
+  button {
+    font-size: 4.5vw;
+  }
+  #resultBox {
+    font-size: 4.5vw;
+  }
 }

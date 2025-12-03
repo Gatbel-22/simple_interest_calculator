@@ -3,49 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>East Africa Interest Rate Calculator</title>
-
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
   </head>
 
-  <body>
-    <div class="container">
-      <h1>Interest Rate Calculator</h1>
-      <p class="subtitle">Banks in South Sudan & Ethiopia</p>
+  <body class="light">
+    <!-- Theme Toggle -->
+    <button id="themeToggle">🌙</button>
 
-      <!-- Bank Selection -->
-      <label for="bank">Select Bank</label>
-      <select id="bank" onchange="setBankRate()">
-        <option value="0.004">Bank of South Sudan — 0.4%</option>
-        <option value="0.07">Equity Bank South Sudan — 7%</option>
-        <option value="0.10">KCB South Sudan — 10%</option>
-        <option value="0.08">Commercial Bank of Ethiopia — 8%</option>
-        <option value="0.13">Dashen Bank Ethiopia — 13%</option>
-        <option value="0.15">Awash Bank Ethiopia — 15%</option>
-      </select>
+    <header>
+      <h2>Interest Rate Calculator</h2>
+      <h4 class="subtitle">Banks in South Sudan & Ethiopia</h4>
+    </header>
+
+    <main class="container">
+      <!-- Currency Switch -->
+      <div class="input-group">
+        <label for="currency">Currency</label>
+        <select id="currency" onchange="changeCurrency()">
+          <option value="SSP">🇸🇸 South Sudanese Pound (SSP)</option>
+          <option value="ETB">🇪🇹 Ethiopian Birr (ETB)</option>
+        </select>
+      </div>
+
+      <!-- Bank -->
+      <div class="input-group">
+        <label for="bank">Select Bank</label>
+        <div class="bank-select">
+          <img id="bankLogo" src="assets/bss.png" alt="Bank Logo" />
+          <select id="bank" onchange="setBankRate(); updateBankLogo();">
+            <option value="0.004" data-logo="assets/bss.png">
+              Bank of South Sudan — 0.4%
+            </option>
+            <option value="0.07" data-logo="assets/equity.png">
+              Equity Bank South Sudan — 7%
+            </option>
+            <option value="0.10" data-logo="assets/kcb.png">
+              KCB South Sudan — 10%
+            </option>
+            <option value="0.08" data-logo="assets/cbe.png">
+              Commercial Bank of Ethiopia — 8%
+            </option>
+            <option value="0.13" data-logo="assets/dashen.png">
+              Dashen Bank Ethiopia — 13%
+            </option>
+            <option value="0.15" data-logo="assets/awash.png">
+              Awash Bank Ethiopia — 15%
+            </option>
+          </select>
+        </div>
+      </div>
 
       <!-- Amount -->
-      <label for="principal">Deposit Amount (SSP / ETB)</label>
-      <input type="number" id="principal" placeholder="Enter amount" />
+      <div class="input-group">
+        <label for="principal">Deposit Amount (SSP)</label>
+        <input
+          type="text"
+          id="principal"
+          placeholder="Enter amount"
+          oninput="formatCurrency(this)"
+        />
+      </div>
 
-      <!-- Rate Slider -->
-      <label for="rate">Interest Rate (%)</label>
-      <input
-        type="number"
-        id="rate"
-        min="0.04"
-        max="25"
-        step="0.01"
-        value="0.04"
-        oninput="updateRate()"
-      />
-      <span id="rate_val">0.004%</span>
+      <!-- Rate -->
+      <div class="input-group">
+        <label for="rate">Interest Rate (%)</label>
+        <input
+          type="number"
+          id="rate"
+          min="0.04"
+          max="25"
+          step="0.01"
+          value="0.04"
+          oninput="updateRate()"
+        />
+        <small id="rate_val">0.04%</small>
+      </div>
 
       <!-- Years -->
-      <label for="years">Number of Years</label>
-      <input type="number" id="years" min="1" max="50" placeholder="e.g., 3" />
+      <div class="input-group">
+        <label for="years">Number of Years</label>
+        <input
+          type="number"
+          id="years"
+          min="1"
+          max="50"
+          placeholder="e.g., 3"
+        />
+      </div>
 
       <!-- Result -->
       <div id="resultBox">
@@ -53,7 +99,9 @@
       </div>
 
       <button onclick="compute()">Compute Interest</button>
-    </div>
-    <footer>© Interest Calculator for South Sudan & Ethiopia</footer>
+      <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+    </main>
+
+    <footer>© 2025 Interest Calculator for South Sudan & Ethiopia</footer>
   </body>
 </html>
