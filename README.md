@@ -35,7 +35,7 @@ A **web-based interest calculator** designed for users in **South Sudan** and **
 
 ## 📷 Screenshot
 
-_(Optional: Add a screenshot of the web app here)_
+![Simple Interest Calculator](assets/screenshot.png)
 
 ---
 
@@ -62,11 +62,7 @@ _(Optional: Add a screenshot of the web app here)_
 
 ## 🌐 Live Demo
 
-You can host this project on **GitHub Pages** for a live demo:
-
-1. Go to your repository **Settings → Pages**.
-2. Select **Branch: main** and **/root folder**.
-3. Save and access the live URL provided by GitHub.
+You can try the live calculator here: [View Live App](https://gatbel-22.github.io/simple_interest_calculator/)
 
 ---
 
