@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to bottom right, #024, #046);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: #ffffff;
+  color: #000;
+  width: 90%;
+  max-width: 450px;
+  padding: 40px;
+  margin-left: 40px;
+  border-radius: 18px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+h1 {
+  font-size: 28px;
+  padding: 4px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  color: #024;
+}
+
+.subtitle {
+  margin-top: -5px;
+  font-size: 14px;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 9px;
+  font-weight: bold;
+  text-align: left;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 5px;
+  margin-top: 2px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+input[type="range"] {
+  width: 50%;
+}
+
+button {
+  margin-top: 10px;
+  width: 50%;
+  padding: 6px;
+  background: #024;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #046;
+}
+
+#resultBox {
+  background: #eef;
+  border-left: 4px solid #024;
+  padding: 3px;
+  margin-top: 40px;
+  min-height: 5px;
+  border-radius: 8px;
+}
+
+footer {
+  position: fixed;
+  bottom: 10px;
+  text-align: center;
+  width: 100%;
+  color: #ddd;
+  font-size: 12px;
+}

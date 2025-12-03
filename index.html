@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>East Africa Interest Rate Calculator</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Interest Rate Calculator</h1>
+      <p class="subtitle">Banks in South Sudan & Ethiopia</p>
+
+      <!-- Bank Selection -->
+      <label for="bank">Select Bank</label>
+      <select id="bank" onchange="setBankRate()">
+        <option value="0.004">Bank of South Sudan — 0.4%</option>
+        <option value="0.07">Equity Bank South Sudan — 7%</option>
+        <option value="0.10">KCB South Sudan — 10%</option>
+        <option value="0.08">Commercial Bank of Ethiopia — 8%</option>
+        <option value="0.13">Dashen Bank Ethiopia — 13%</option>
+        <option value="0.15">Awash Bank Ethiopia — 15%</option>
+      </select>
+
+      <!-- Amount -->
+      <label for="principal">Deposit Amount (SSP / ETB)</label>
+      <input type="number" id="principal" placeholder="Enter amount" />
+
+      <!-- Rate Slider -->
+      <label for="rate">Interest Rate (%)</label>
+      <input
+        type="number"
+        id="rate"
+        min="0.04"
+        max="25"
+        step="0.01"
+        value="0.04"
+        oninput="updateRate()"
+      />
+      <span id="rate_val">0.004%</span>
+
+      <!-- Years -->
+      <label for="years">Number of Years</label>
+      <input type="number" id="years" min="1" max="50" placeholder="e.g., 3" />
+
+      <!-- Result -->
+      <div id="resultBox">
+        <p id="result"></p>
+      </div>
+
+      <button onclick="compute()">Compute Interest</button>
+    </div>
+    <footer>© Interest Calculator for South Sudan & Ethiopia</footer>
+  </body>
+</html>
