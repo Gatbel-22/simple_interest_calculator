@@ -4,104 +4,130 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>East Africa Interest Rate Calculator</title>
+    <meta name="description" content="Compare savings interest rates across banks in South Sudan and Ethiopia, and see what a deposit is worth at maturity." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
   </head>
+  <body>
+    <div class="paper-texture" aria-hidden="true"></div>
 
-  <body class="light">
-    <!-- Theme Toggle -->
-    <button id="themeToggle">🌙</button>
+    <button id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+      <span class="toggle-icon" aria-hidden="true">&#9789;</span>
+    </button>
 
-    <header>
-      <h2>Interest Rate Calculator</h2>
-      <h4 class="subtitle">Banks in South Sudan & Ethiopia</h4>
+    <header class="app-header">
+      <p class="eyebrow">East Africa Savings</p>
+      <h1>Interest Rate Calculator</h1>
+      <p class="subtitle">Compare deposit returns across banks in South Sudan &amp; Ethiopia</p>
     </header>
 
-    <main class="container">
-      <!-- Currency Switch -->
-      <div class="input-group">
-        <label for="currency">Currency</label>
-        <select id="currency" onchange="changeCurrency()">
-          <option value="SSP">🇸🇸 South Sudanese Pound (SSP)</option>
-          <option value="ETB">🇪🇹 Ethiopian Birr (ETB)</option>
-        </select>
+    <main class="sheet">
+      <div class="sheet-grid">
+        <section class="panel" aria-labelledby="bankHeading">
+          <h2 id="bankHeading">Bank &amp; currency</h2>
+
+          <div class="field">
+            <label for="currency">Currency</label>
+            <select id="currency">
+              <option value="SSP">&#127768;&#127774; South Sudanese Pound (SSP)</option>
+              <option value="ETB">&#127749;&#127777; Ethiopian Birr (ETB)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="bank">Bank</label>
+            <select id="bank">
+              <option value="0.4" data-logo="assets/bss.png" data-name="Bank of South Sudan">
+                Bank of South Sudan — 0.4%
+              </option>
+              <option value="7" data-logo="assets/equity.png" data-name="Equity Bank South Sudan">
+                Equity Bank South Sudan — 7%
+              </option>
+              <option value="10" data-logo="assets/kcb.png" data-name="KCB South Sudan">
+                KCB South Sudan — 10%
+              </option>
+              <option value="8" data-logo="assets/cbe.png" data-name="Commercial Bank of Ethiopia">
+                Commercial Bank of Ethiopia — 8%
+              </option>
+              <option value="13" data-logo="assets/dashen.png" data-name="Dashen Bank Ethiopia">
+                Dashen Bank Ethiopia — 13%
+              </option>
+              <option value="15" data-logo="assets/awash.png" data-name="Awash Bank Ethiopia">
+                Awash Bank Ethiopia — 15%
+              </option>
+            </select>
+          </div>
+
+          <div class="bank-preview" id="bankPreview">
+            <span class="bank-logo-frame">
+              <img id="bankLogo" src="assets/bss.png" alt="" />
+              <span class="bank-initial" id="bankInitial" hidden>B</span>
+            </span>
+            <div class="bank-meta">
+              <p class="bank-name" id="bankName">Bank of South Sudan</p>
+              <p class="bank-rate"><span id="bankRateBadge">0.4%</span> per year</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="depositHeading">
+          <h2 id="depositHeading">Deposit details</h2>
+
+          <div class="field">
+            <label for="principal" id="principalLabel">Deposit amount (SSP)</label>
+            <div class="amount-field">
+              <span class="currency-code" id="currencyBadge">SSP</span>
+              <input
+                type="text"
+                inputmode="decimal"
+                id="principal"
+                placeholder="0"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-label-row">
+              <label for="rate">Interest rate</label>
+              <output id="rate_val" for="rate">0.40%</output>
+            </div>
+            <div class="rate-controls">
+              <input type="range" id="rateSlider" min="0.04" max="25" step="0.01" value="0.4" aria-label="Interest rate slider" />
+              <input type="number" id="rate" min="0.04" max="25" step="0.01" value="0.4" aria-label="Interest rate, percent" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="years">Number of years</label>
+            <input type="number" id="years" min="1" max="50" placeholder="e.g. 3" />
+          </div>
+
+          <p class="field-error" id="formError" role="alert" hidden></p>
+
+          <div class="actions">
+            <button type="button" id="computeBtn" class="btn btn-primary">Compute interest</button>
+            <button type="button" id="downloadBtn" class="btn btn-secondary" disabled>Download PDF</button>
+          </div>
+        </section>
       </div>
 
-      <!-- Bank -->
-      <div class="input-group">
-        <label for="bank">Select Bank</label>
-        <div class="bank-select">
-          <img id="bankLogo" src="assets/bss.png" alt="Bank Logo" />
-          <select id="bank" onchange="setBankRate(); updateBankLogo();">
-            <option value="0.004" data-logo="assets/bss.png">
-              Bank of South Sudan — 0.4%
-            </option>
-            <option value="0.07" data-logo="assets/equity.png">
-              Equity Bank South Sudan — 7%
-            </option>
-            <option value="0.10" data-logo="assets/kcb.png">
-              KCB South Sudan — 10%
-            </option>
-            <option value="0.08" data-logo="assets/cbe.png">
-              Commercial Bank of Ethiopia — 8%
-            </option>
-            <option value="0.13" data-logo="assets/dashen.png">
-              Dashen Bank Ethiopia — 13%
-            </option>
-            <option value="0.15" data-logo="assets/awash.png">
-              Awash Bank Ethiopia — 15%
-            </option>
-          </select>
+      <section class="passbook" id="resultBox" aria-live="polite">
+        <div class="passbook-perforation" aria-hidden="true"></div>
+        <div class="passbook-body">
+          <p class="passbook-empty" id="passbookEmpty">Fill in the deposit details above and compute to see your maturity value here.</p>
+          <div class="passbook-result" id="result" hidden></div>
         </div>
-      </div>
-
-      <!-- Amount -->
-      <div class="input-group">
-        <label for="principal">Deposit Amount (SSP)</label>
-        <input
-          type="text"
-          id="principal"
-          placeholder="Enter amount"
-          oninput="formatCurrency(this)"
-        />
-      </div>
-
-      <!-- Rate -->
-      <div class="input-group">
-        <label for="rate">Interest Rate (%)</label>
-        <input
-          type="number"
-          id="rate"
-          min="0.04"
-          max="25"
-          step="0.01"
-          value="0.04"
-          oninput="updateRate()"
-        />
-        <small id="rate_val">0.04%</small>
-      </div>
-
-      <!-- Years -->
-      <div class="input-group">
-        <label for="years">Number of Years</label>
-        <input
-          type="number"
-          id="years"
-          min="1"
-          max="50"
-          placeholder="e.g., 3"
-        />
-      </div>
-
-      <!-- Result -->
-      <div id="resultBox">
-        <p id="result"></p>
-      </div>
-
-      <button onclick="compute()">Compute Interest</button>
-      <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+      </section>
     </main>
 
-    <footer>© 2025 Interest Calculator for South Sudan & Ethiopia</footer>
+    <footer class="app-footer">
+      <p>&copy; 2025 Interest Calculator for South Sudan &amp; Ethiopia. Rates shown are indicative — confirm with your bank.</p>
+    </footer>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer src="script.js"></script>
   </body>
 </html>
